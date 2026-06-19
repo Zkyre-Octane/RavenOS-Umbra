@@ -169,5 +169,5 @@ Relationship to RavenOS‑Core
 Umbra is not a version update — it is a larger, more capable OS built on the same design principles.
 | Project | Purpose | Size | Features |
 | --- | --- | --- | --- |
-| RavenOS‑Core | Minimal display helpers | Tiny | No UI, no input, no animations |
+| RavenOS‑Core | Minimal display helpers | Tiny | Basic UI, 2-button input, no animations |
 | RavenOS Umbra | Full embedded UI system | Larger | Menus, animations, 5‑button input, transitions |
