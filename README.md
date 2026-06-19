@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/Zkyre-Octane/RavenOS-Core/blob/main/RavenOS/assets/logo/ravenos-logo.png">
+</p>
+
 RavenOS Umbra
 A next‑generation embedded OS for ESP32/Arduino featuring a modular UI framework, smooth animations, and a 5‑button input system.
 
