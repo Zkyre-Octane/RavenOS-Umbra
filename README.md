@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/Zkyre-Octane/RavenOS-Core/blob/main/RavenOS/assets/logo/ravenos-logo.png">
+  <img src="https://github.com/Zkyre-Octane/RavenOS-Umbra/blob/main/assets/logo/RavenOS_Umbra_logo.png">
 </p>
 
 RavenOS Umbra
