@@ -2,120 +2,120 @@
   <img src="https://github.com/Zkyre-Octane/RavenOS-Umbra/blob/main/assets/logo/RavenOS_Umbra_logo.png">
 </p>
 
-RavenOS Umbra
+# RavenOS Umbra  
 A next‑generation embedded OS for ESP32/Arduino featuring a modular UI framework, smooth animations, and a 5‑button input system.
 
-RavenOS Umbra is the expanded, feature‑rich evolution of the original RavenOS‑Core.
-Where the Core focuses on minimalism and simplicity, Umbra introduces a complete UI layer, animation engine, and multi‑button navigation — while preserving the same clean architecture and developer‑friendly design philosophy.
+RavenOS Umbra is the expanded, feature‑rich evolution of the original **RavenOS‑Core**.  
+Where Core focuses on minimalism and simplicity, Umbra introduces:
+
+- A complete UI layer  
+- A structured animation engine  
+- A directional input system  
+- A modular subsystem architecture  
+- A clean, documented SDK‑style API  
 
 Umbra is ideal for embedded projects requiring:
 
-Multi‑screen UI
+- Multi‑screen UI  
+- Menus and navigation  
+- Icons, headers, and structured layouts  
+- Smooth transitions and animations  
+- Responsive 5‑button input  
 
-Menus and navigation
+If you need a tiny OS with only display helpers, choose **RavenOS‑Core**.  
+If you want a full embedded UI system, choose **Umbra**.
 
-Icons, headers, and structured layouts
+---
 
-Smooth transitions and animations
+# Key Features
 
-Responsive 5‑button input
+## 5‑Button Input System
+- Up, Down, Left, Right, Enter/Escape  
+- Active‑low button handling  
+- Internal pull‑up configuration  
+- Clean `RavenInputEvent` enum  
+- `poll()` returns **one event per call**  
+- Optional `isPressed()` for continuous input  
+- Fully isolated subsystem (`raven_input.h/.cpp`)
 
-If you need a tiny OS with only display helpers, choose RavenOS‑Core.
-If you want a full embedded UI system, choose Umbra.
+## Umbra UI Framework
+- Menus  
+- Selectors  
+- Panels  
+- Headers  
+- Dialogs  
+- Reusable UI components  
+- UI state machine
 
-Key Features
-5‑Button Input System
-Up, Down, Left, Right, Select
+## Animation Engine
+- Slide transitions  
+- Fade‑in / fade‑out  
+- Timed animations  
+- Frame‑based rendering  
+- Works directly with DisplayManager
 
-Debouncing
+## Optimized Display Manager
+- Region‑based clearing  
+- Partial redraws  
+- Icon rendering  
+- Text alignment helpers  
+- Boot screen utilities  
+- SSD1306‑optimized drawing
 
-State tracking
+## Modular Architecture
+Umbra is built from **isolated subsystems**, each with its own `.h` and `.cpp`:
 
-Event callbacks
+- Display Engine  
+- Input Engine  
+- Sound Engine  
+- UI Engine  
 
-Navigation helpers
+No cross‑dependencies.  
+No spaghetti.  
+No hidden logic.
 
-Umbra UI Framework
-Menus
+## Asset Support
+- Icons  
+- Bitmaps  
+- Fonts  
+- UI elements  
+Stored under `/assets`.
 
-Selectors
+---
 
-Panels
+# Architecture Overview
 
-Headers
-
-Dialogs
-
-Reusable UI components
-
-Animation Engine
-Slide transitions
-
-Fade‑in / fade‑out
-
-Timed animations
-
-Frame‑based rendering
-
-Optimized Display Manager
-Region‑based clearing
-
-Partial redraws
-
-Icon rendering
-
-Text alignment helpers
-
-Modular Architecture
-Clean separation between display, input, and UI layers
-
-Asset Support
-Icons, bitmaps, fonts, and UI elements stored in /assets
-
-Architecture Overview
 Umbra is organized into three core modules:
 
-DisplayManager
+## DisplayManager
 Responsible for all rendering operations:
+- Headers  
+- Icons  
+- Text alignment  
+- Bitmaps  
+- Partial redraws  
+- Animation frames  
 
-Headers
-
-Icons
-
-Text alignment
-
-Bitmaps
-
-Partial redraws
-
-Animation frames
-
-InputManager
+## InputEngine
 Handles 5‑button input:
+- Debouncing  
+- Active‑low reads  
+- Event generation  
+- `poll()` and `isPressed()`  
+- Zero UI logic  
 
-Debouncing
-
-State tracking
-
-Event callbacks
-
-Navigation helpers
-
-UmbraUI
+## UmbraUI
 High‑level UI components:
+- Menus  
+- Selectors  
+- Panels  
+- Animated transitions  
+- UI state machine  
 
-Menus
+---
 
-Selectors
+# Project Structure
 
-Panels
-
-Animated transitions
-
-UI state machine
-
-Project Structure
-Code
 RavenOS-Umbra/
 │
 ├── src/
@@ -123,6 +123,8 @@ RavenOS-Umbra/
 │   ├── raven_display.h
 │   ├── raven_input.cpp
 │   ├── raven_input.h
+│   ├── raven_sound.cpp
+│   ├── raven_sound.h
 │   ├── raven_ui.cpp
 │   ├── raven_ui.h
 │   ├── main.cpp
@@ -135,39 +137,48 @@ RavenOS-Umbra/
 ├── lib/
 ├── test/
 └── platformio.ini
-Getting Started
-Requirements
-ESP32 or Arduino board
 
-SSD1306 OLED display
 
-PlatformIO or Arduino IDE
+---
 
-Adafruit GFX + SSD1306 libraries
+# Getting Started
 
-Basic Example
-cpp
+## Requirements
+- ESP32 development board  
+- SSD1306 OLED display  
+- PlatformIO or Arduino IDE  
+- Adafruit GFX + SSD1306 libraries  
+
+## Basic Example
+
+```cpp
 #include "raven_display.h"
 #include "raven_input.h"
 #include "raven_ui.h"
 
 DisplayManager displayManager(&display);
-InputManager inputManager;
-UmbraUI ui(&displayManager, &inputManager);
+InputEngine inputEngine(PIN_UP, PIN_DOWN, PIN_LEFT, PIN_RIGHT, PIN_ENTER, PIN_ESCAPE);
+UmbraUI ui(&displayManager, &inputEngine);
 
 void setup() {
     display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-    inputManager.begin();
+    inputEngine.init();
     displayManager.ravenBootScreen();
 }
 
 void loop() {
-    inputManager.update();
-    ui.update();
+    RavenInputEvent ev = inputEngine.poll();
+    ui.update(ev);
 }
+
 Relationship to RavenOS‑Core
 Umbra is not a version update — it is a larger, more capable OS built on the same design principles.
+
 | Project | Purpose | Size | Features |
 | --- | --- | --- | --- |
-| RavenOS‑Core | Minimal display helpers | Tiny | Basic UI, 2-button input, no animations |
-| RavenOS Umbra | Full embedded UI system | Larger | Menus, animations, 5‑button input, transitions |
+| RavenOS‑Core | Minimal display helpers | Tiny | Basic drawing + text |
+| RavenOS Umbra | Full UI/UX embedded OS | Larger | UI engine, animations, input |
+
+Credits
+RavenOS Umbra is developed by NyxOverflow Also known as Zkyre‑Octane and contributors.
+Designed with the RavenLabs philosophy: clean, modular, documented, and developer‑friendly.
