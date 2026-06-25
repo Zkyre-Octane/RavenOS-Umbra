@@ -1,13 +1,15 @@
 # Changelog
 
-## 2026‑06‑17 - Initial Repository Upload
+## 2026‑06‑17 — Initial Repository Upload
 ### Added
 - main.cpp
 - raven_display.cpp
 - raven_display.h
 - raven_ui.h
 
-## 2026-06-22 - Added new screen utilities
+---
+
+## 2026‑06‑22 — Added New Screen Utilities
 ### Added
 - Header system APIs
 - Display control functions
@@ -19,63 +21,80 @@
 - Cleaned up repeated APIs
 
 ### Notes
-- The text helpers APIs still on testing
+- The text helper APIs are still in testing
 
-## 2026-06-24 - Added Full SoundManager Documentation & Expanded Audio Suite
+---
+
+## 2026‑06‑24 — Added Full SoundManager Documentation & Expanded Audio Suite
 ### Added
 - New SoundManager documentation for both header and implementation files
-
-- detailed section headers and SDK‑style comments
+- Detailed section headers and SDK‑style comments
 
 - Introduced pairing melodies:
-
-- NFC pairing
-
-- ESP‑NOW pairing
-
-- WiFi pairing
+  - NFC pairing
+  - ESP‑NOW pairing
+  - WiFi pairing
 
 ### Added vehicle/FPV sound patterns:
-
 - Arm sequence
-
 - Disarm sequence
-
 - Beacon locator pulse
 
 ### Added RavenOS Umbra sound identity patterns:
-
 - Boot jingle
-
 - Task complete
-
 - Error tone
-
 - Notification
-
 - UI click
 
 ### Improved
-- Unified tone generation through ravenPlayTone()
-
+- Unified tone generation through `ravenPlayTone()`
 - Cleaned up melody timing and structure
-
-- Organized .cpp into clear functional sections:
-
-- System sounds
-
-- Pairing sounds
-
-- Vehicle/FPV sounds
+- Organized `.cpp` into clear functional sections:
+  - System sounds
+  - Pairing sounds
+  - Vehicle/FPV sounds
 
 ### Notes
 This update establishes the RavenOS Core Audio Identity, shared across:
-
 - Raven Node (Flipper Zero–based ESP32 module)
-
 - Future RavenOS UGV systems
-
 - Future RavenOS UAV systems
 
-Volume control intentionally omitted — passive buzzers do not support real analog volume.
+Volume control intentionally omitted — passive buzzers do not support real analog volume.  
 A global sound ON/OFF toggle will be added in the System Config API.
+
+---
+
+## 2026‑06‑25 — Added InputEngine Subsystem (Directional + Action Buttons)
+### Added
+- New InputEngine subsystem (`raven_input.h` / `raven_input.cpp`)
+- Clean, isolated API for directional and action buttons
+- Support for:
+  - UP
+  - DOWN
+  - LEFT
+  - RIGHT
+  - ENTER
+  - ESCAPE
+- Active‑low button handling with internal pull‑ups
+- High‑level `RavenInputEvent` enum
+- `poll()` method returning one event per call
+- `isPressed()` helper for continuous input checks
+- Fully documented header and implementation following RavenLabs SDK style
+
+### Improved
+- Input handling is now fully decoupled from:
+  - Display logic
+  - Sound logic
+  - UI logic
+- Eliminated previous input‑logic mixing issues
+- Ensured compatibility with all RavenOS Core devices
+
+### Notes
+- GPIO 34–39 limitations documented (no internal pull‑ups)
+- InputEngine now serves as the foundation for the upcoming RavenOS Menu Engine
+- This subsystem completes the triad of isolated core engines:
+  - Display Engine
+  - Sound Engine
+  - Input Engine
