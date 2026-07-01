@@ -149,8 +149,19 @@ RavenOS-Umbra/
 - PlatformIO or Arduino IDE  
 - Adafruit GFX + SSD1306 libraries  
 
-## Basic Example
+Relationship to RavenOS‑Core
+Umbra is not a version update — it is a larger, more capable OS built on the same design principles.
 
+| Project | Purpose | Size | Features |
+| --- | --- | --- | --- |
+| RavenOS‑Core | Minimal display helpers | Tiny | Basic drawing + text |
+| RavenOS Umbra | Full UI/UX embedded OS | Larger | UI engine, animations, input |
+
+Credits
+RavenOS Umbra is developed by NyxOverflow Also known as Zkyre‑Octane and contributors.
+Designed with the RavenLabs philosophy: clean, modular, documented, and developer‑friendly.
+
+## Basic Example
 ```cpp
 #include "raven_display.h"
 #include "raven_input.h"
@@ -170,15 +181,3 @@ void loop() {
     RavenInputEvent ev = inputEngine.poll();
     ui.update(ev);
 }
-
-Relationship to RavenOS‑Core
-Umbra is not a version update — it is a larger, more capable OS built on the same design principles.
-
-| Project | Purpose | Size | Features |
-| --- | --- | --- | --- |
-| RavenOS‑Core | Minimal display helpers | Tiny | Basic drawing + text |
-| RavenOS Umbra | Full UI/UX embedded OS | Larger | UI engine, animations, input |
-
-Credits
-RavenOS Umbra is developed by NyxOverflow Also known as Zkyre‑Octane and contributors.
-Designed with the RavenLabs philosophy: clean, modular, documented, and developer‑friendly.
