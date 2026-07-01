@@ -98,3 +98,42 @@ A global sound ON/OFF toggle will be added in the System Config API.
   - Display Engine
   - Sound Engine
   - Input Engine
+ 
+## 2026-06-30 — Core Refactor, Project Reorganization & BootScreen Module
+
+### Added
+New configuration layer:
+raven_pins.h
+raven_DisplayConfig.h
+New BootScreen UI module
+Bitmap boot logo 
+Boot sound integrated into startup sequence
+Battery icon assets
+Project asset organization for UI resources
+
+### Changed
+Reorganized project into modular directories:
+core/
+hal/
+config/
+ui/
+assets/
+Simplified main.cpp by moving hardware configuration into dedicated config files
+DisplayManager refactored into a lightweight SSD1306 wrapper
+Removed experimental scheduler integration
+Removed unfinished display redraw/tick system
+Removed experimental text helper utilities
+Separated BootScreen UI from the display driver
+
+### Improved
+Cleaner separation between:
+Hardware Abstraction Layer (HAL)
+Core runtime modules
+Configuration files
+UI modules
+Prepared the codebase for future RavenOS applications without increasing runtime complexity
+
+### Notes
+RavenOS is now transitioning from a monolithic firmware toward a lightweight embedded runtime.
+The display driver is now responsible only for rendering primitives, while UI composition is handled by dedicated modules such as BootScreen.
+This refactor establishes the base architecture for future RavenOS devices including Raven Node, Raven Wraith and upcoming RavenLabs platforms.
